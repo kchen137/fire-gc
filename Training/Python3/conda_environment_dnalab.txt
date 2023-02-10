@@ -1,0 +1,16 @@
+$ conda create --name dnalab python=3.10
+
+$ conda install -n dnalab pip
+
+$ conda install -n dnalab jupyter=1
+$ conda install -n dnalab numpy=1.23
+$ conda install -n dnalab scipy=1.9
+$ conda install -n dnalab matplotlib=3.6
+$ conda install -n dnalab pandas=1.5 
+$ conda install -n dnalab seaborn=0.12
+$ conda install -n dnalab scikit-learn=1.1
+$ conda install -n dnalab biopython=1
+
+$ conda activate dnalab
+
+$ conda deactivate
