@@ -1,0 +1,94 @@
+Notebook 1:
+
+# Task: 
+# B-form DNA has a helical diameter of 20. nm and a regular height between base pairs of 0.34 nm
+# 1. Save these as variables
+# 2. Calculate the volume of a stacked base-pair step if it were modeled as (i) a cylinder and (ii) a sphere ( define pi as PI = 3.141592653589793 ). Print these values.
+# 3. According to Wikipedia, human chromosome 2 is 242,696,752 base-pairs long. What is the length of chr.2 in meters (1m = 1 billion nm). Print this value.
+# 4. Delete your variables
+d = 20.
+h = 0.34
+PI = 3.141592653589793
+V_cyl = PI*((d/2)**2)*h
+print(V_cyl)
+print()
+V_sph = (4/3)*PI*(d/2)**2
+print(V_sph)
+print()
+chr2 = 242696752
+L_chr2 = chr2*h/(10**9)
+print(L_chr2)
+del d, h, PI, V_cyl, V_sph, chr2, L_chr2
+
+# Task:
+# Sequence: AGTCGGTAATTATACCGACTA
+# Make a list where every element of that list in a base in the above sequence using the append loop above.
+# Print the list.
+# Print every element of the list element by element with a for loop based on index numbering. Here, use len(list) to know how many indices to use
+# Next, do a mutation. 
+# Print every index where a 'T' occurs. Then, change every T with uracil, U. This will be a for loop based on index numbering.
+# Finally, print both the regular sequence string above the mutated sequence string
+# -!- look up "python .join()" method in https://www.w3schools.com/python/
+# Once completed, delete your variables
+
+sequence='AGTCGGTAATTATACCGACTA'
+SEQ = []
+for s in sequence:
+    SEQ.append(s)
+print(SEQ)
+for idx in range (len(SEQ) ):
+    print( SEQ[idx] )
+print()
+
+MUT_SEQ = SEQ.copy()
+for idx in range( len(SEQ) ):
+    if SEQ[idx]=="T":
+        print(idx)
+        MUT_SEQ[idx]="U"
+        
+mut_sequence=''.join(MUT_SEQ)
+
+print()
+print(sequence)
+print(mut_sequence)
+
+del sequence, SEQ, MUT_SEQ, mut_sequence
+
+
+Notebook 2:
+# TASK: Read and store the "test_dnapdb.pdb" file in the datafiles directory
+# by storing the readlines output in a variable called 'lst', which you will need to keep for the next examples.
+# Print the first 20 lines line-by-line
+infile = open( "datafiles/test_dnapdb.pdb", "r")
+lst = infile.readlines()
+infile.close()
+for i in range(0, 20):
+    print(lst[i])
+del infile
+
+
+# TASK: Print every item in lst if both "O5'" and "DA" are in the item
+for line in lst:
+    if ("O5'" in line)&('DA' in line):
+        print(line)
+
+# TASK: 
+# using the data in lst, make a file called "testpdb_firstbasepair.pdb" that contains the header and the first BASE PAIR of the original.
+# Hint: What is Chain A and Chain B? How are they arranged? Does the first base in Chain A mean the same as the first in Chain B?
+# Make sure to renumber your atom numbers in the new file
+
+first_bp = []
+
+first_bp.append(lst[0])
+
+for itm in lst:
+    if (" DC A   1 " in itm) or (" DG B 400 " in itm):
+        first_bp.append(itm)
+for idx in range(len(first_bp)):
+    if "400" in first_bp[idx]:
+        first_bp[idx]=first_bp[idx].replace("400", "  2")
+        
+outfile = open("testpdb_firstbasepair.pdb", "w")
+for x in first_bp:
+    outfile.write(x)
+outfile.close()
